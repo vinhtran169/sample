@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html ng-app="m2mApp" ng-controller="DelCtrl">
+<head>
+<meta charset="UTF-8">
+<title>検索サンプル</title>
+
+<script type="text/javascript"
+	src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+
+<link type="text/css" media="screen"
+	href="lib/jquery/css/jquery-ui.structure.css" rel="stylesheet" />
+<link type="text/css" media="screen" href="lib/jquery/css/ui.jqgrid.css"
+	rel="stylesheet" />
+
+<link type="text/css" media="screen"
+	href="lib/jquery/css/jquery-ui.theme.css" rel="stylesheet" />
+<link type="text/css" media="screen" href="lib/jquery/css/jquery-ui.css"
+	rel="stylesheet" />
+
+<script type="text/javascript" src="lib/jquery/js/jquery.js"></script>
+<script type="text/javascript" src="lib/jquery/js/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="lib/jquery/js/jquery.jqGrid.min.js"></script>
+<script type="text/javascript"
+	src="lib/jquery/js/i18n/grid.locale-ja.js"></script>
+<script type="text/javascript" src="lib/jquery/js/jquery.ui.js"></script>
+<script type="text/javascript" src="lib/jquery/js/jquery-ui.min.js"></script>
+<script type="text/javascript"
+	src="lib/jquery/js/jquery.ui.datepicker-ja.js"></script>
+
+<script type="text/javascript" src="lib/jquery/js/jquery.tablednd.js"></script>
+
+<script type="text/javascript" src="lib/m2m.js"></script>
+
+<style type="text/css">
+body,button,input,table {
+	font-family: 'Lucida Grande', 'Hiragino Kaku Gothic ProN', Meiryo,
+		sans-serif;
+}
+</style>
+
+</head>
+<script src="bower_components/angular/angular.js"></script>
+<script>
+	var m2mApp = angular.module('m2mApp', []);
+
+	m2mApp.controller('DelCtrl', [ '$scope', '$http', function($scope, $http) {
+		$scope.del = function(pid) {
+			$http.post('http://localhost:4000/jax-rs/m2m/delete', {
+				DeleteItemRequest : {
+					"id" : pid
+				}
+			}).success(function(data) {
+				$scope.title = querystr;
+				$scope.item = data;
+			});
+		};
+	} ]);
+</script>
+<body>
+
+	<!-- 結果を表示 -->
+	<table id="result"></table>
+	<div>
+		Id: <input ng-model="id"> <br /> <input type="button"
+			value="Delete" ng-click="del(id);">
+	</div>
+	<br>
+	<br>
+
+
+
+</body>
+</html>

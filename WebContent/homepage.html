@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>M2M Pilot</title>
+<meta charset="UTF-8">
+
+<link type="text/css" media="screen" href="lib/jquery/css/custom.css" rel="stylesheet" />
+<link type="text/css" media="screen" href="lib/jquery/css/bootstrap.min.css" rel="stylesheet" />
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script
+	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+<script>
+	$.fn
+			.extend({
+				popoverClosable : function(options) {
+					var defaults = {
+						template : '<div class="popover">\
+<div class="arrow"></div>\
+<div class="popover-header">\
+<button type="button" class="close" data-dismiss="popover" aria-hidden="true">&times;</button>\
+<h3 class="popover-title"></h3>\
+</div>\
+<div class="popover-content"></div>\
+</div>'
+					};
+					options = $.extend({}, defaults, options);
+					var $popover_togglers = this;
+					$popover_togglers.popover(options);
+					$popover_togglers.on('click', function(e) {
+						e.preventDefault();
+						$popover_togglers.not(this).popover('hide');
+					});
+					$('html').on('click', '[data-dismiss="popover"]',
+							function(e) {
+								$popover_togglers.popover('hide');
+							});
+				}
+			});
+
+	$(function() {
+		$('[data-toggle="popover"]').popoverClosable();
+	});
+</script>
+
+</head>
+<body>
+	<div class="container_custom">
+		<h1>
+			<p class="text-left">メッセージ一覧</p>
+		</h1>
+		<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+			</div>
+
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div
+				id="bs-example-navbar-collapse-1">
+				<!-- <ul class="nav navbar-nav">
+					<button class="btn btn-default dropdown-toggle" type="button"
+						id="menu1" data-toggle="dropdown"
+						style="margin-top: 10px; width: 215px; margin-left: -15px">
+						全店舗 <span class="caret" style="margin-left: 140px"></span>
+					</button>
+					<ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+						<li role="presentation"><a role="menuitem" tabindex="-1"
+							href="#">HTML</a></li>
+						<li role="presentation"><a role="menuitem" tabindex="-1"
+							href="#">CSS</a></li>
+						<li role="presentation"><a role="menuitem" tabindex="-1"
+							href="#">JavaScript</a></li>
+					</ul>
+				</ul> -->
+				<form class="navbar-form navbar-left" role="search">
+					<div class="form-group">
+						<input type="text" class="form-control"
+							style="width: 215px; margin-left: -11px"
+							placeholder="スタッフ名称（ふりがな）"> <!-- <input type="text"
+							class="form-control" style="width: 215px" placeholder="メールアドレス"> -->
+					</div>
+					<button type="submit" class="glyphiconNav glyphicon-search"
+						style="border: 1px solid #ccc; border-color: #ccc; background-color: rgb(248, 248, 248);"></button>
+					<!-- <button type="submit" class="glyphiconNav glyphicon-remove"
+						style="border: 1px solid #ccc; border-color: #ccc; background-color: rgb(248, 248, 248);"></button> -->
+
+<!-- 					<label>該当件数: <span class="badgecustom">44</span></label>
+ -->
+				</form>
+			</div>
+			<!-- /.navbar-collapse -->
+		</div>
+		<!-- /.container-fluid --> </nav>
+		<div style="margin-top: -20px;">
+			<ul class="pagination">
+				<li><a href="#">1</a></li>
+				<li><a href="#">2</a></li>
+				<li><a href="#">3</a></li>
+				<li><a href="#">4</a></li>
+				<li><a href="#">5</a></li>
+				<li><a href="#">Next »</a></li>
+				<li><a href="#">Last »</a></li>
+			</ul>
+		</div>
+
+		<div class="bootstrap-table">
+			<div class="fixed-table-container">
+				<div class="fixed-table-body">
+					<table data-toggle="table" class="table table-hover">
+						<tbody>
+
+							<tr style="color: #1a99d9">
+								<th style="" class="col-sm-3"><div class="th-inner">ID</div>
+									<div class="fht-cell"></div></th>
+								<th style="" class="col-md-5"><div class="th-inner">メッセージ</div>
+									<div class="fht-cell"></div></th>
+								<!-- <th style=""><div class="th-inner">メールアドレス</div>
+									<div class="fht-cell"></div></th> -->
+								<th style=""><div class="th-inner"
+										style="margin-left: -7px">
+										変更
+										<button type="button" class="btn btn-default btn-sm"
+											style="border-color: #fcbd00; width: 10px; height: 30px; margin-top: -11px"
+											title="メッセージ" data-toggle="popover" data-placement="top"
+											data-content="指定されたアカウントのログインパスワードを変更する事ができます。">
+											<span class="glyphicon glyphicon-question-sign"></span>
+										</button>
+									</div>
+									<div class="fht-cell"></div></th>
+								<th style=""><div class="th-inner"
+										style="margin-left: -3px">
+										削除
+										<button type="button" class="btn btn-default btn-sm"
+											style="border-color: #fcbd00; width: 10px; height: 30px; margin-top: -11px"
+											title="メッセージ" data-toggle="popover" data-placement="top"
+											data-content="指定されたアカウントのiPad情報をリセットする事ができます。BPにログインするiPadを変更される場合にご使用ください。">
+											<span class="glyphicon glyphicon-question-sign"></span>
+										</button>
+									</div>
+
+									<div class="fht-cell"></div></th>
+								
+
+							</tr>
+							<c:forEach items="${studentList}" var="student">
+								<tr>
+									<td style="">${student.staffId}</td>
+									<td style="">${student.staffName}</td>
+									
+
+									
+									<td><button class="glyphicon glyphicon-phone"
+											style="width: 55px; height: 47px"></button></td>
+									<td style="padding-left: 1px"><button
+											class="glyphicon glyphicon-hand-right"
+											style="width: 55px; height: 47px"></button></td>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+				</div>
+				<div class="fixed-table-pagination"></div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
